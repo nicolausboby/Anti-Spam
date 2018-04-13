@@ -9,19 +9,21 @@
     );
     $url = 'https://api.twitter.com/1.1/search/tweets.json';
     $requestMethod = 'GET';
-    $getfields ='?q=xkcd'; // Masukkan query di sini
+    // Get spam
+    $spam = "gojek";
+    // Search
+    $getfields ='?q=gojek'; // Masukkan query di sini
     $twitter = new TwitterAPIExchange($settings);
     $tweets_raw = json_decode($twitter->setGetfield($getfields)->buildOauth($url, $requestMethod)->performRequest(), true)['statuses'];
-    echo $tweets_raw[7]['text'];
-    // Jadiin JSON
+    // Check for spam
     $i = 0;
-    $file = fopen('tweets.json', "w");
     foreach($tweets_raw as $tweet_raw) {
-        $tweets[$i++] = $tweet_raw['text'];
+        //$is_spam[$i++] = $tweet_raw['text'];
+        // Execute algorithm. MODIFY YOUR PHP.INI FIRST
+        //$is_spam['bm'][$i] = shell_exec("python3 bm.py ".$spam." \"".$tweet_raw['text']."\"");
+        //$is_spam['kmp'][$i] = shell_exec("python3 kmp.py ".$spam." \"".$tweet_raw['text']."\"");
+        $is_spam['regex'][$i++] = shell_exec("python3 regex.py ".$spam." \"".$tweet_raw['text']."\"");        
     }
-    fwrite($file, json_encode($tweets));
-    fclose($file);
-    // Execute algorithm. MODIFY YOUR PHP.INI FIRST
-    $test = shell_exec("python3 -c 'print(\"halo\")'");
-    echo "<pre>$test</pre>";
+    // Diambil di sini sama HTML nya
+    echo $is_spam['regex'][0]
 ?>
