@@ -33,13 +33,16 @@ def boyer_moore_matching(text, pattern):
 
 
 def main():
-    sample_string = sys.argv[2]
-    pattern = sys.argv[1]
-    found = boyer_moore_matching(sample_string, pattern)
-    if found == -1:
-        print("no match found!")
-    else:
-        print("found match on : ", found, "-", found+len(pattern)-1)
+    try:
+        sample_string = sys.argv[2]
+        pattern = sys.argv[1]
+        found = boyer_moore_matching(sample_string, pattern)
+        if found == -1:
+            print("no match found!")
+        else:
+            print("found match on : ", found, "-", found + len(pattern) - 1)
+    except IndexError:
+        print("Missing Argument(s)!")
 
 
 if __name__ == "__main__":
