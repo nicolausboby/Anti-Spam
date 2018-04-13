@@ -1,3 +1,6 @@
+import sys
+
+
 class LastOccurrence(object):
     def __init__(self, pattern, alphabet):
         self.occurrences = dict()
@@ -30,14 +33,13 @@ def boyer_moore_matching(text, pattern):
 
 
 def main():
-    sample = open("sample.txt", "r")
-    sample_string = sample.read()
-    spam_pattern = "aaab"
-    found = boyer_moore_matching(sample_string, spam_pattern)
+    sample_string = sys.argv[2]
+    pattern = sys.argv[1]
+    found = boyer_moore_matching(sample_string, pattern)
     if found == -1:
         print("no match found!")
     else:
-        print("found match on : ", len(sample_string)-(found+len(spam_pattern))+1, "-", len(sample_string)-found+1)
+        print("found match on : ", found, "-", found+len(pattern)-1)
 
 
 if __name__ == "__main__":
