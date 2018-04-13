@@ -1,51 +1,54 @@
 import sys
 
-def KMP(pattern, text):
-	np = len(pattern)
-	nt = len(text)
+def KMP(pat, txt):
+	M = len(pat)
+	N = len(txt)
 
-	longest = [0] * np
-	pi = 0
+	lps = [0]*M
+	j = 0 # pattern index
 
-	PrefixSufix(pattern, np, longest)
+	LPS(pat, M, lps)
 
-	i = 0
-	while (i < nt):
-		if (pattern[pi] == text[i]):
+	i = 0 # text index
+	while i < N:
+		if pat[j] == txt[i]:
 			i += 1
-			pi += 1
+			j += 1
 
-		if (pi == np):
-			print("It's a Spam")
-			pi = longest[pi-1]
+		if j == M:
+			print ("Ditemukan pattern pada index ke " + str(i-j))
+			j = lps[j-1]
 
-		elif (i < nt) and (pattern[pi] != text[i]):
-			if (pi != 0):
-				pi = longest[pi-1]
+		elif i < N and pat[j] != txt[i]:
+			if j != 0:
+				j = lps[j-1]
+				print("Tidak ditemukan pattern pada teks")
 			else:
 				i += 1
 
-def PrefixSufix(pattern, np, longest):
+def LPS(pat, M, lps):
 	len = 0
-	longest[0]
+
+	lps[0]
 	i = 1
 
-	while (i < np):
-		if (pattern[i] == pattern[len]):
+	while i < M:
+		if pat[i]==pat[len]:
 			len += 1
-			longest = len
+			lps[i] = len
 			i += 1
 		else:
-			if (len != 0):
-				len = longest[len-1]
+			if len != 0:
+				len = lps[len-1]
 			else:
-				longest[i] = 0
+				lps[i] = 0
 				i += 1
 
 def main():
-	text = sys.argv[2]
-	pattern = sys.argv[1]
-	KMP(pattern, text)
+    teks = sys.argv[1]
+    pattern = sys.argv[2]
+    KMP(pattern, teks)
+
 
 if __name__ == '__main__':
 	main()
