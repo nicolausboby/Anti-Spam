@@ -15,10 +15,13 @@
     echo $tweets_raw[7]['text'];
     // Jadiin JSON
     $i = 0;
-    $file = fopen('tweets.json', w);
+    $file = fopen('tweets.json', "w");
     foreach($tweets_raw as $tweet_raw) {
         $tweets[$i++] = $tweet_raw['text'];
     }
     fwrite($file, json_encode($tweets));
-    $fclose($file);
+    fclose($file);
+    // Execute algorithm. MODIFY YOUR PHP.INI FIRST
+    $test = shell_exec("python3 -c 'print(\"halo\")'");
+    echo "<pre>$test</pre>";
 ?>
