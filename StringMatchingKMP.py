@@ -1,3 +1,5 @@
+import sys
+
 def KMP(pattern, text):
 	np = len(pattern)
 	nt = len(text)
@@ -41,8 +43,8 @@ def PrefixSufix(pattern, np, longest):
 				i += 1
 
 def main():
-	text = "ABCDEFGHIJ"
-	pattern = "CDEFG"
+	text = sys.argv[2]
+	pattern = sys.argv[1]
 	KMP(pattern, text)
 
 if __name__ == '__main__':
