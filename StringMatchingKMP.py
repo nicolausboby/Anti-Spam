@@ -22,7 +22,6 @@ def KMP(pat, txt):
 		elif i < N and pat[j] != txt[i]:
 			if j != 0:
 				j = lps[j-1]
-				print("Tidak ditemukan pattern pada teks")
 			else:
 				i += 1
 
