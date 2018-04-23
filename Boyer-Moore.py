@@ -38,9 +38,10 @@ def main():
         pattern = sys.argv[1]
         found = boyer_moore_matching(sample_string, pattern)
         if found == -1:
-            print("no match found!")
+            return false;
         else:
-            print("found match on : ", found, "-", found + len(pattern) - 1)
+            return true;
+            # print("found match on : ", found, "-", found + len(pattern) - 1)
     except IndexError:
         print("Missing Argument(s)!")
 
